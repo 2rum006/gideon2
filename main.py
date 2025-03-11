@@ -1,9 +1,8 @@
-#!/usr/bin/python
-
 import random
 import requests
 from time import sleep
 import os, signal, sys
+from pyfiglet import figlet_format
 from rich.console import Console
 from rich.prompt import Prompt, IntPrompt
 from rich.text import Text
@@ -11,7 +10,7 @@ from rich.style import Style
 import pystyle
 from pystyle import Colors, Colorate
 
-from gideon2 import CPMTooldev
+from gideon2 import Pakundo
 
 __CHANNEL_USERNAME__ = "GÎDÊÔN MÂLLÊR"
 __GROUP_USERNAME__   = "GÎDÊÔN MÂLLÊR"
@@ -39,7 +38,7 @@ def gradient_text(text, colors):
 
 def banner(console):
     os.system('cls' if os.name == 'nt' else 'clear')
-    brand_name =  "GIDEON"
+    brand_name = figlet_format('GIDEON', font='bloody')
     colors = [
         "rgb(255,0,0)", "rgb(255,69,0)", "rgb(255,140,0)", "rgb(255,215,0)", "rgb(173,255,47)", 
         "rgb(0,255,0)", "rgb(0,255,255)", "rgb(0,191,255)", "rgb(0,0,255)", "rgb(139,0,255)",
@@ -49,7 +48,8 @@ def banner(console):
     console.print(colorful_text)
     print(Colorate.Horizontal(Colors.rainbow, '=================================================================='))
     print(Colorate.Horizontal(Colors.rainbow, '\t         𝐏𝐋𝐄𝐀𝐒𝐄 𝐋𝐎𝐆𝐎𝐔𝐓 𝐅𝐑𝐎𝐌 𝐂𝐏𝐌 𝐁𝐄𝐅𝐎𝐑𝐄 𝐔𝐒𝐈𝐍𝐆 𝐓𝐇𝐈𝐒 𝐓𝐎𝐎𝐋'))
-    print(Colorate.Horizontal(Colors.rainbow, '    𝐒𝐇𝐀𝐑𝐈𝐍𝐆 𝐓𝐇𝐄 𝐀𝐂𝐂𝐄𝐒𝐒 𝐊𝐄𝐘 𝐈𝐒 𝐍𝐎𝐓 𝐀𝐋𝐋𝐎𝐖𝐄𝐃 𝐀𝐍𝐃 𝐖𝐈𝐋𝐋 𝐁𝐄 𝐁𝐋𝐎𝐂𝐊𝐄𝐃'))
+    print(Colorate.Horizontal(Colors.rainbow, '    𝐒𝐇𝐀𝐑𝐈𝐍𝐆 𝐓𝐇𝐄 𝐀𝐂𝐂𝐄𝐒𝐒 𝐊𝐄𝐘 𝐈𝐒 𝐍𝐎𝐓 𝐀𝐋𝐋𝐎𝐖𝐄𝐃 𝐀𝐍𝐃 𝐖𝐈𝐋𝐋 𝐁𝐄 𝐁𝐋𝐎𝐂𝐊𝐄𝐃')) 
+    print(Colorate.Horizontal(Colors.rainbow, '      𝐂𝐎𝐍𝐓𝐀𝐂𝐓 𝐌𝐄 𝐓𝐎 𝐁𝐔𝐘 𝐔𝐍𝐋𝐈𝐌𝐈𝐓𝐄𝐃 𝐁𝐀𝐋𝐀𝐍𝐂𝐄 𝐓𝐆 @GIDEON ')) 
     print(Colorate.Horizontal(Colors.rainbow, f' ‌           𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦: @{__CHANNEL_USERNAME__} 𝐎𝐫 @{__GROUP_USERNAME__}'))
     print(Colorate.Horizontal(Colors.rainbow, '=================================================================='))
 
@@ -59,7 +59,7 @@ def load_player_data(cpm):
         data = response.get('data')
         if 'floats' in data and 'localID' in data and 'money' in data and 'coin' in data:
         
-            print(Colorate.Horizontal(Colors.rainbow, '==========[ GIDEON DETAILS ]=========='))
+            print(Colorate.Horizontal(Colors.rainbow, '==========[ GIDEON ]=========='))
             
             print(Colorate.Horizontal(Colors.rainbow, f'Name   : {(data.get("Name") if "Name" in data else "UNDEFINED")}.'))
                 
@@ -81,7 +81,7 @@ def load_key_data(cpm):
 
     data = cpm.get_key_data()
     
-    print(Colorate.Horizontal(Colors.rainbow, '========[ GIDEON KEY DETAILS ]========'))
+    print(Colorate.Horizontal(Colors.rainbow, '========[ GIDEON ]========'))
     
     print(Colorate.Horizontal(Colors.rainbow, f'Access Key : {data.get("access_key")}.'))
     
@@ -134,7 +134,7 @@ if __name__ == "__main__":
         acc_password = prompt_valid_value("[bold][?] Account Password[/bold]", "Password", password=False)
         acc_access_key = prompt_valid_value("[bold][?] Access Key[/bold]", "Access Key", password=False)
         console.print("[bold cyan][%] Trying to Login[/bold cyan]: ", end=None)
-        cpm = CPMTooldev(acc_access_key)
+        cpm = Pakundo(acc_access_key)
         login_response = cpm.login(acc_email, acc_password)
         if login_response != 0:
             if login_response == 100:
@@ -162,33 +162,38 @@ if __name__ == "__main__":
             load_player_data(cpm)
             load_key_data(cpm)
             load_client_details()
-            choices = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26"]
-            print(Colorate.Horizontal(Colors.rainbow, '{01}: Increase Money           1K'))
-            print(Colorate.Horizontal(Colors.rainbow, '{02}: Increase Coins           3.5K'))
-            print(Colorate.Horizontal(Colors.rainbow, '{03}: King Rank                4K'))
-            print(Colorate.Horizontal(Colors.rainbow, '{04}: Change ID                3.5K'))
+            choices = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"]
+            print(Colorate.Horizontal(Colors.rainbow, '{01}: Increase Money           1.5K'))
+            print(Colorate.Horizontal(Colors.rainbow, '{02}: Increase Coins           4.5K'))
+            print(Colorate.Horizontal(Colors.rainbow, '{03}: King Rank                8K'))
+            print(Colorate.Horizontal(Colors.rainbow, '{04}: Change ID                4.5K'))
             print(Colorate.Horizontal(Colors.rainbow, '{05}: Change Name              100'))
             print(Colorate.Horizontal(Colors.rainbow, '{06}: Change Name (Rainbow)    100'))
             print(Colorate.Horizontal(Colors.rainbow, '{07}: Number Plates            2K'))
             print(Colorate.Horizontal(Colors.rainbow, '{08}: Account Delete           FREE'))
             print(Colorate.Horizontal(Colors.rainbow, '{09}: Account Register         FREE'))
             print(Colorate.Horizontal(Colors.rainbow, '{10}: Delete Friends           500'))
-            print(Colorate.Horizontal(Colors.rainbow, '{11}: Unlock Paid Cars         4k'))
-            print(Colorate.Horizontal(Colors.rainbow, '{12}: Unlock all Cars          3K'))
-            print(Colorate.Horizontal(Colors.rainbow, '{13}: Unlock all Cars Siren    2K'))
-            print(Colorate.Horizontal(Colors.rainbow, '{14}: Unlock w16 Engine        3K'))
+            print(Colorate.Horizontal(Colors.rainbow, '{11}: Unlock Paid Cars         5k'))
+            print(Colorate.Horizontal(Colors.rainbow, '{12}: Unlock all Cars          6K'))
+            print(Colorate.Horizontal(Colors.rainbow, '{13}: Unlock all Cars Siren    3.5K'))
+            print(Colorate.Horizontal(Colors.rainbow, '{14}: Unlock w16 Engine        4K'))
             print(Colorate.Horizontal(Colors.rainbow, '{15}: Unlock All Horns         3K'))
-            print(Colorate.Horizontal(Colors.rainbow, '{16}: Unlock Disable Damage    2K'))
-            print(Colorate.Horizontal(Colors.rainbow, '{17}: Unlock Unlimited Fuel    2K'))
-            print(Colorate.Horizontal(Colors.rainbow, '{18}: Unlock House 3           3K'))
-            print(Colorate.Horizontal(Colors.rainbow, '{19}: Unlock Smoke             2K'))
+            print(Colorate.Horizontal(Colors.rainbow, '{16}: Unlock Disable Damage    3K'))
+            print(Colorate.Horizontal(Colors.rainbow, '{17}: Unlock Unlimited Fuel    3K'))
+            print(Colorate.Horizontal(Colors.rainbow, '{18}: Unlock House 3           4K'))
+            print(Colorate.Horizontal(Colors.rainbow, '{19}: Unlock Smoke             4K'))
             print(Colorate.Horizontal(Colors.rainbow, '{20}: Unlock Wheels            4K'))
             print(Colorate.Horizontal(Colors.rainbow, '{21}: Unlock Animations        2K'))
             print(Colorate.Horizontal(Colors.rainbow, '{22}: Unlock Equipaments M     3K'))
             print(Colorate.Horizontal(Colors.rainbow, '{23}: Unlock Equipaments F     3K'))
             print(Colorate.Horizontal(Colors.rainbow, '{24}: Change Race Wins         1K'))
             print(Colorate.Horizontal(Colors.rainbow, '{25}: Change Race Loses        1K'))
-            print(Colorate.Horizontal(Colors.rainbow, '{26}: Clone Account            5K'))
+            print(Colorate.Horizontal(Colors.rainbow, '{26}: Clone Account            7K'))
+            print(Colorate.Horizontal(Colors.rainbow, '{27}: Custom HP                2.5K'))
+            print(Colorate.Horizontal(Colors.rainbow, '{28}: Custom Angle             1.5K'))
+            print(Colorate.Horizontal(Colors.rainbow, '{29}: Custom Tire burner       1.5K'))
+            print(Colorate.Horizontal(Colors.rainbow, '{30}: Custom Car Millage       2K'))
+            print(Colorate.Horizontal(Colors.rainbow, '{31}: Custom Car Brake         2K'))
             print(Colorate.Horizontal(Colors.rainbow, '{0} : Exit'))
             
             print(Colorate.Horizontal(Colors.rainbow, '===============[ GIDEON ]==============='))
@@ -203,7 +208,7 @@ if __name__ == "__main__":
                 print(Colorate.Horizontal(Colors.rainbow, '[?] Insert how much money do you want.'))
                 amount = IntPrompt.ask("[?] Amount")
                 console.print("[%] Saving your data: ", end=None)
-                if amount > 0 and amount <= 999999999:
+                if amount > 0 and amount <= 500000000:
                     if cpm.set_player_money(amount):
                         print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
                         print(Colorate.Horizontal(Colors.rainbow, '======================================'))
@@ -224,7 +229,7 @@ if __name__ == "__main__":
                 print(Colorate.Horizontal(Colors.rainbow, '[?] Insert how much coins do you want.'))
                 amount = IntPrompt.ask("[?] Amount")
                 console.print("[%] Saving your data: ", end=None)
-                if amount > 0 and amount <= 999999999:
+                if amount > 0 and amount <= 500000:
                     if cpm.set_player_coins(amount):
                         print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
                         print(Colorate.Horizontal(Colors.rainbow, '======================================'))
@@ -261,7 +266,7 @@ if __name__ == "__main__":
                 print(Colorate.Horizontal(Colors.rainbow, '[?] Enter your new ID.'))
                 new_id = Prompt.ask("[?] ID")
                 console.print("[%] Saving your data: ", end=None)
-                if len(new_id) >= 0 and len(new_id) <= 999999999 and (' ' in new_id) == False:
+                if len(new_id) >= 0 and len(new_id) <= 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999 and (' ' in new_id) == False:
                     if cpm.set_player_localid(new_id.upper()):
                         print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
                         print(Colorate.Horizontal(Colors.rainbow, '======================================'))
@@ -552,7 +557,7 @@ if __name__ == "__main__":
                 print(Colorate.Horizontal(Colors.rainbow, '[!] Insert how much races you win.'))
                 amount = IntPrompt.ask("[?] Amount")
                 console.print("[%] Changing your data: ", end=None)
-                if amount > 0 and amount <= 999999999999999999999999999:
+                if amount > 0 and amount <= 999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999:
                     if cpm.set_player_wins(amount):
                         print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
                         print(Colorate.Horizontal(Colors.rainbow, '======================================'))
@@ -573,7 +578,7 @@ if __name__ == "__main__":
                 print(Colorate.Horizontal(Colors.rainbow, '[!] Insert how much races you lose.'))
                 amount = IntPrompt.ask("[?] Amount")
                 console.print("[%] Changing your data: ", end=None)
-                if amount > 0 and amount <= 999999999999999999999:
+                if amount > 0 and amount <= 999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999:
                     if cpm.set_player_loses(amount):
                         print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
                         print(Colorate.Horizontal(Colors.rainbow, '======================================'))
@@ -601,11 +606,94 @@ if __name__ == "__main__":
                     answ = Prompt.ask("[?] Do You want to Exit ?", choices=["y", "n"], default="n")
                     if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'Thank You for using our tool, please join our telegram channe: @{__CHANNEL_USERNAME__}.'))
                     else: continue
+                else:     
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED.'))
+                    print(Colorate.Horizontal(Colors.rainbow, '[!] THAT RECIEVER ACCOUNT IS GMAIL PASSWORD IS NOT VALID OR THAT ACCOUNT IS NOT REGISTERED.'))
+                    sleep(2)
+                    continue
+            elif service == 27:
+                console.print("[bold yellow][!] Note[/bold yellow]: original speed can not be restored!.")
+                console.print("[bold cyan][!] Enter Car Details.[/bold cyan]")
+                car_id = IntPrompt.ask("[bold][?] Car Id[/bold]")
+                new_hp = IntPrompt.ask("[bold][?]Enter New HP[/bold]")
+                new_inner_hp = IntPrompt.ask("[bold][?]Enter New Inner Hp[/bold]")
+                new_nm = IntPrompt.ask("[bold][?]Enter New Torque[/bold]")
+                new_torque = IntPrompt.ask("[bold][?]Enter New NM[/bold]")
+                console.print("[bold cyan][%] Hacking Car Speed[/bold cyan]:",end=None)
+                if cpm.hack_car_speed(car_id, new_hp, new_inner_hp, new_nm, new_torque):
+                    console.print("[bold green]SUCCESFUL (✔)[/bold green]")
+                    console.print("================================")
+                    answ = Prompt.ask("[?] Do You want to Exit ?", choices=["y", "n"], default="n")
+                    if answ == "y": print(Colorate.Horizontal(Colors.rainbow, f'Thank You for using our tool, please join our telegram channe: @{__CHANNEL_USERNAME__}.'))
+                    else: continue
                 else:
                     print(Colorate.Horizontal(Colors.rainbow, 'FAILED.'))
                     print(Colorate.Horizontal(Colors.rainbow, '[!] Please use valid values.'))
                     sleep(2)
                     continue
+            elif service == 28: # ANGLE
+                print(Colorate.Horizontal(Colors.rainbow, '[!] ENTER CAR DETALIS'))
+                car_id = IntPrompt.ask("[bold][?] CAR ID[/bold]")
+                print(Colorate.Horizontal(Colors.rainbow, '[!] ENTER STEERING ANGLE'))
+                custom = IntPrompt.ask("[red][?]﻿ENTER THE AMOUNT OF ANGLE YOU WANT[/red]")                
+                console.print("[red][%] HACKING CAR ANGLE[/red]: ", end=None)
+                if cpm.max_max1(car_id, custom):
+                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                    answ = Prompt.ask("[red][?] DO YOU WANT TO EXIT[/red] ?", choices=["y", "n"], default="n")
+                    if answ == "y": console.print("THANK YOU FOR USING OUR TOOL")
+                    else: continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                    sleep(2)
+                    continue
+            elif service == 29: # tire
+                print(Colorate.Horizontal(Colors.rainbow, '[!] ENTER CAR DETALIS'))
+                car_id = IntPrompt.ask("[bold][?] CAR ID[/bold]")
+                print(Colorate.Horizontal(Colors.rainbow, '[!] ENTER PERCENTAGE'))
+                custom = IntPrompt.ask("[pink][?]﻿ENTER PERCENTAGE TIRES U WANT[/pink]")                
+                console.print("[red][%] Setting Percentage [/red]: ", end=None)
+                if cpm.max_max2(car_id, custom):
+                    print(Colorate.Horizontal(Colors.rainbow, 'SUCCESSFUL'))
+                    answ = Prompt.ask("[bold green][?] DO YOU WANT TO EXIT[/bold green] ?", choices=["y", "n"], default="n")
+                    if answ == "y": console.print("THANK YOU FOR USING OUR TOOL")
+                    else: continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                    sleep(2)
+                    continue
+            elif service == 30: # Millage
+                console.print("[bold]ENTER CAR DETAILS![/bold]")
+                car_id = IntPrompt.ask("[bold][?] CAR ID[/bold]")
+                console.print("[bold]ENTER NEW MILLAGE![/bold]")
+                custom = IntPrompt.ask("[bold blue][?]﻿ENTER MILLAGE U WANT[/bold blue]")                
+                console.print("[bold red][%] Setting Percentage [/bold red]: ", end=None)
+                if cpm.millage_car(car_id, custom):
+                    console.print("[bold green]SUCCESSFUL (✔)[/bold green]")
+                    answ = Prompt.ask("[bold][?] DO YOU WANT TO EXIT[/bold] ?", choices=["y", "n"], default="n")
+                    if answ == "y": console.print("THANK YOU FOR USING OUR TOOL")
+                    else: continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                    sleep(2)
+                    continue
+            elif service == 31: # Brake
+                console.print("[bold]ENTER CAR DETAILS![/bold]")
+                car_id = IntPrompt.ask("[bold][?] CAR ID[/bold]")
+                console.print("[bold]ENTER NEW BRAKE![/bold]")
+                custom = IntPrompt.ask("[bold blue][?]﻿ENTER BRAKE U WANT[/bold blue]")                
+                console.print("[bold red][%] Setting BRAKE [/bold red]: ", end=None)
+                if cpm.brake_car(car_id, custom):
+                    console.print("[bold green]SUCCESSFUL (✔)[/bold green]")
+                    answ = Prompt.ask("[bold][?] DO YOU WANT TO EXIT[/bold] ?", choices=["y", "n"], default="n")
+                    if answ == "y": console.print("THANK YOU FOR USING OUR TOOL")
+                    else: continue
+                else:
+                    print(Colorate.Horizontal(Colors.rainbow, 'FAILED'))
+                    print(Colorate.Horizontal(Colors.rainbow, 'PLEASE TRY AGAIN'))
+                    sleep(2)
+                    continue
             else: continue
             break
-        break
